@@ -1,9 +1,14 @@
-const InputForm = ({label, ...otherProps}) => {
+import './input-form.styles.scss';
 
+const InputForm = ({ label, ...otherProps }) => {
     return (
-        <div>
-            <label htmlFor={name}>{label}</label>
-            <input required name={name} {...otherProps} />
+        <div className="group">
+            <input className="form-input" {...otherProps} />
+            {label && (
+                <label className={`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>
+                    {label}
+                </label>
+            )}
         </div>
     )
 }
