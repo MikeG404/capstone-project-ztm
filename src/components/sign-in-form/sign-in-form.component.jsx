@@ -19,9 +19,9 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(formFieldsObj);
     const { email, password } = formFields;
 
+
     const signInWithGoogle = async () => {
-        const { user } = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     }
 
 
@@ -29,7 +29,7 @@ const SignInForm = () => {
         event.preventDefault();
 
         try {
-            await signInAuthUserWithEmailAndPassword(email, password);
+            const { user } = await signInAuthUserWithEmailAndPassword(email, password);
             setFormFields(formFieldsObj);
         } catch (error) {
             switch (error.code) {

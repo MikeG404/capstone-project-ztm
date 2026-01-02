@@ -3,7 +3,15 @@
 // Setup Firebaas App to work with, it's the main instance
 import { initializeApp } from "firebase/app";
 // I would like to use google to connect with my app, that's what the provider gives to me
-import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    signOut,
+    getAuth,
+    onAuthStateChanged 
+} from "firebase/auth";
 // This is the method to create and modifify the doc and the instance
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
@@ -63,4 +71,14 @@ export const signUpWithEmailAndPassword = async (email, password) => {
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password);
+}
+
+export const signOutUser = async () => signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => {
+    if (!callback) {
+        return;
+    }
+
+    onAuthStateChanged(auth, callback)
 }
