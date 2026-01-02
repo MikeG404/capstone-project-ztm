@@ -2,10 +2,10 @@ import './navigation.styles.scss';
 import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
-import CrownLogo from "../../../assets/crown.svg?react";
-import { UserContext } from '../../../context/user.context';
+import CrownLogo from "../../assets/crown.svg?react";
+import { UserContext } from '../../context/user.context';
 
-import { signOutUser } from '../../../../utils/firebase/firebase.utils';
+import { signOutUser } from '../../../utils/firebase/firebase.utils';
 
 
 const Navigation = () => {

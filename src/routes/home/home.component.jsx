@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Directory from "../../directory/directory.component.jsx";
+import Directory from "../../components/directory/directory.component.jsx";
 
 // Categories is in App.jsx, that ensure that we can reuse this data anywhere else. It also allow every child through Directory to use it.
 const categories = [
