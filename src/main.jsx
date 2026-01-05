@@ -6,12 +6,15 @@ import './index.scss';
 
 import App from './App.jsx'
 import { UserProvider } from './context/user.context.jsx';
+import { ProductProvider } from './context/product.context.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <ProductProvider>
+          <App />
+        </ProductProvider>
       </UserProvider>
     </BrowserRouter>
   </StrictMode>,
