@@ -13,7 +13,7 @@ import {
     onAuthStateChanged 
 } from "firebase/auth";
 // This is the method to create and modifify the doc and the instance
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, collection, writeBatch, query, getDocs } from "firebase/firestore";
 
 // I need the credential
 const firebaseConfig = {
@@ -37,6 +37,37 @@ export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+    const batch = writeBatch(db);
+
+    objectsToAdd.forEach((obj) => {
+        const docRef = doc(collectionRef, obj.title.toLowerCase());
+        batch.set(docRef, obj);
+    })
+
+    await batch.commit();
+    console.log('all objects have been successfully added to Firestore');
+}
+
+export const getCategoriesAndDocuments = async () => {
+    // Which collection I want to work with
+    const collectionRef = collection(db, 'categories');
+    // What I want to get from this collection (I can filter and take specific data from this collection)
+    const q = query(collectionRef);
+    // I start the request to get the data
+    const querySnapshot = await getDocs(q);
+
+    // I've getted the data from the collection
+    const categoryMap = querySnapshot.docs.reduce((acc, doc) => {
+        const { title, items } = doc.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {})
+
+    return categoryMap;
+}
 
 export const createUserDocumentFromAuth = async (
     userAuth,
