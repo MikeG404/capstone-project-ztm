@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './global.styles';
 
 import App from './App.jsx'
-import { UserProvider } from './context/user.context.jsx';
 import { CategoriesProvider } from './context/categories.context.jsx';
 import { CartProductProvider } from './context/cart.context.jsx';
 import { Provider } from 'react-redux';
